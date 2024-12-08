@@ -1,0 +1,88 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Weather forecast</PageTitle>
+
+@using Capstone2.Data
+@using Capstone2.Repositories
+@using Capstone2.Classes
+@using System.Linq
+@inject WeatherForecastService ForecastService
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (patterns == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pattern Name</th>
+                <th>Is Free</th>
+                <th>Designer Name</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pattern in patterns)
+            {
+                <tr>
+                    <td>@pattern.Name</td>
+                    <td>@pattern.IsFree</td>
+                    <td>@pattern.Designer.Name</td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    private RavelryRepository ravelryRepository;
+
+    private Pattern[]? patterns;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+
+        ravelryRepository = new RavelryRepository();
+
+        patterns = (await ravelryRepository.api.SearchPatternsAsync("scarf")).Patterns.ToArray();
+    }
+}

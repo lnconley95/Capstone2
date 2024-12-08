@@ -1,0 +1,39 @@
+Software Development Capstone: Due December 13th @ Noon
+
+Crochet Notebook(?) Project Plan
+
+Overview:
+	This app will work as a sort of digital projects notebook. It will be able to store the crochet patterns you like, as well as store them as active Works in Progress, Completed Projects, and Future Projects.
+	It can also be used to keep track of the yarn you have and what hooks you have. You can also make a little wish/shopping list to easily add what mats you need for a project you want to start. This is all for
+	personal use to be more organize, not a way to sell anything. The only way to make money using this app is just to help keep track of the expenses to price your pieces accordingly, if you plan on selling you work. 
+
+UI:
+	-Basic style menu on the top ribbon of the page. If it starts to look too crowded, place all subjects under a pop-out side menu accessed by a hamburger icon.
+	-Color scheme could be  dull pastels with black or black bordered white text. 
+	-Has a search bar at the top of the page, above the ribbon if using that for the menu or across the ribbon if the navigation menu is nested under the hamburger icon.
+	-Larger font sizes will be used. Personally, I don't see very well and if I am in the middle of crocheting and need to look at something, I'd want to be able to see the words from a decent distance away. 
+	
+API:
+		-Possibly using Ravelry API ravelRY.
+		-Would like to be able to integrated saving youtube videos to the personal notebook.
+		
+Classes:
+		-Patterns
+		 -Used to store the patterns you are interested in.
+		-Yarn
+		 -Used to catalog the yarn you currently have and how much of each.
+		-Hooks
+		 -Used to catalog what hooks you have.
+		-Future Projects
+		 -Patterns you know you are wanting to start.
+		-WIPs
+		 -Patterns you are currently working on. Maybe integrate a checklist for when you finish using skeins/cakes of yarn to see if you are going to have enoough.
+		-Completed Projects
+		 -Patterns you completed, so if you want to go back and remake it, it'll be easier to find.
+		-Wishlist/Shopping List
+		 -An easy checklist to help you gather what you need for your projects.
+	
+Technical Insight:
+		The app will use the Ravelry API to acess the Ravelry database of patterns and yarns and then retrieve the data and store it into the chosen category i.e. WIPs. I would also like to be able to pull specific data 
+		from these patterns and move it to the wish/shopping list. I.E. a pattern calls for 4 skeins of light blue worsted weight yarn and a 6mm hook. it would take that information and add just that, not the whole pattern
+		to the checklist. I know I'll need to be using if/else and boolean staements for the button functions for adding things to their catagories. I'm not very good at planning out things, so this has been difficult. I don't know what else I'll do until I start working on it.  
