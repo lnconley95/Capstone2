@@ -1,0 +1,68 @@
+@page "/search"
+
+@inject HttpClient Http
+
+<h3>Search for Patterns</h3>
+
+<div>
+    <input type="text" @bind="searchKeyword" @oninput="SearchSolutions" placeholder="Enter search keyword" />
+</div>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+
+@if (solutions != null && solutions.Any())
+{
+    <ul>
+        @foreach (var solution in solutions)
+        {
+            <li>@solution.Name</li>
+        }
+    </ul>
+}
+else if (solutions != null)
+{
+    <p>No solutions found.</p>
+}
+
+@code {
+    private string searchKeyword;
+    private bool isLoading = false;
+    private List<Solution> solutions;
+
+    private async Task SearchSolutions()
+    {
+        if (string.IsNullOrWhiteSpace(searchKeyword))
+        {
+            solutions = null;
+            return;
+        }
+
+        isLoading = true;
+        solutions = await GetSolutionsFromApi(searchKeyword);
+        isLoading = false;
+    }
+
+    private async Task<List<Solution>> GetSolutionsFromApi(string keyword)
+    {
+        try
+        {
+            // Make an API call to search for solutions using the keyword
+            var response = await Http.GetFromJsonAsync<List<Solution>>($"https://api.ravelry.com/patterns/search.json?keyword={keyword}");
+            return response ?? new List<Solution>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching data: {ex.Message}");
+            return new List<Solution>();
+        }
+    }
+
+    public class Solution
+    {
+        public string Name { get; set; }
+        // Add other properties as needed
+    }
+}
