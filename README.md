@@ -1,3 +1,4 @@
+# Capstone2
 Software Development Capstone README
 
 Once I started trying to develope the web app, I quickly realized I was too ambitious. The following is what I
@@ -12,4 +13,3 @@ Features:
 2. Lists-- The descriptors of the patterns i.e. Name, Author
 3. Async-- Made asynce from using Json
 4. Tables-- Also mad eiwth json if I remember correctly
-
